@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mission Complete 💍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+    text-align: center;
+    padding-top: 8vh;
+    overflow: hidden;
+}
+
+/* Big Rotating Heart */
+#bigHeart {
+    font-size: 120px;
+    animation: rotateHeart 4s linear infinite;
+    margin: 20px 0;
+}
+
+@keyframes rotateHeart {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+#foreverBtn {
+    margin-top: 30px;
+}
+
+#finalMessage {
+    display: none;
+    margin-top: 30px;
+    font-size: 1rem;
+}
+</style>
+</head>
+
+<body class="fade-in">
+
+<h1 class="glow" id="finalGreeting"></h1>
+
+<div id="loveMeterContainer">
+    <div id="loveMeter"></div>
+</div>
+
+<div id="bigHeart">💖</div>
+
+<h2>Will You Be Mine Forever? 💍</h2>
+
+<button class="pixel-btn" id="foreverBtn" onclick="foreverYes()">
+    YES FOREVER 💘
+</button>
+
+<div id="finalMessage">
+    <h2>MISSION COMPLETE 💖</h2>
+    <p>You have unlocked Eternal Love Mode 🔓</p>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+const name = localStorage.getItem("valentineName") || "My Love";
+document.getElementById("finalGreeting").textContent =
+    name + ", This Is Our Final Stage 💖";
+
+/* Max Out Love Meter */
+increaseLove(100);
+
+/* Continuous Fireworks + Confetti + Emoji Rain */
+setInterval(() => {
+    fireworks();
+}, 1200);
+
+setInterval(() => {
+    confettiBurst();
+}, 2000);
+
+function emojiRain() {
+    const emoji = document.createElement("div");
+    emoji.innerHTML = "😍";
+    emoji.style.position = "fixed";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.top = "-20px";
+    emoji.style.fontSize = "25px";
+    emoji.style.animation = "floatUp 4s linear forwards";
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 4000);
+}
+
+setInterval(emojiRain, 600);
+
+/* Forever Button */
+function foreverYes() {
+    document.getElementById("finalMessage").style.display = "block";
+    shakeScreen();
+    confettiBurst();
+    fireworks();
+}
+</script>
+
+</body>
+</html>
