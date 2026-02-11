@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Initializing Love Protocol...</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+    background: radial-gradient(circle at center, #ff99cc, #000000);
+    color: white;
+    text-align: center;
+}
+
+#introContainer {
+    margin-top: 20vh;
+}
+
+#loadingBarContainer {
+    width: 60%;
+    height: 20px;
+    border: 2px solid pink;
+    margin: 30px auto;
+}
+
+#loadingBar {
+    height: 100%;
+    width: 0%;
+    background: pink;
+}
+
+#nameInput {
+    padding: 10px;
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#enterBtn {
+    display: none;
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body class="fade-in">
+
+<div id="introContainer">
+    <h1 class="glow">Initializing Love Protocol...</h1>
+    <div id="loadingBarContainer">
+        <div id="loadingBar"></div>
+    </div>
+
+    <p id="statusText">Booting Romantic Systems...</p>
+
+    <div id="nameSection" style="display:none;">
+        <p>Enter Your Name 💖</p>
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <br>
+        <button class="pixel-btn" onclick="saveName()">Confirm</button>
+    </div>
+
+    <button class="pixel-btn" id="enterBtn" onclick="enterSite()">ENTER 💘</button>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+let progress = 0;
+const loadingBar = document.getElementById("loadingBar");
+const statusText = document.getElementById("statusText");
+const nameSection = document.getElementById("nameSection");
+const enterBtn = document.getElementById("enterBtn");
+
+const messages = [
+    "Booting Romantic Systems...",
+    "Scanning Heartbeat...",
+    "Detecting Love Levels...",
+    "Calibrating Feelings...",
+    "Love Detected 💖"
+];
+
+let msgIndex = 0;
+
+const interval = setInterval(() => {
+    progress += 5;
+    loadingBar.style.width = progress + "%";
+
+    if (progress % 25 === 0 && msgIndex < messages.length) {
+        statusText.textContent = messages[msgIndex];
+        msgIndex++;
+    }
+
+    if (progress >= 100) {
+        clearInterval(interval);
+        statusText.textContent = "Initialization Complete 💘";
+        nameSection.style.display = "block";
+    }
+}, 150);
+
+function saveName() {
+    const name = document.getElementById("nameInput").value;
+    if (name.trim() === "") return;
+    localStorage.setItem("valentineName", name);
+    nameSection.style.display = "none";
+
+    const hour = new Date().getHours();
+    let greeting = "Hello";
+    if (hour < 12) greeting = "Good Morning";
+    else if (hour < 18) greeting = "Good Afternoon";
+    else greeting = "Good Evening";
+
+    statusText.textContent = greeting + ", " + name + " 💖";
+    enterBtn.style.display = "inline-block";
+}
+
+function enterSite() {
+    window.location.href = "question.html";
+}
+</script>
+
+</body>
+</html>
