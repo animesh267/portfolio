@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Love Letter 💌</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+    text-align: center;
+    padding-top: 8vh;
+}
+
+#letterContainer {
+    display: none;
+    width: 80%;
+    margin: 30px auto;
+    background: white;
+    color: #ff2e88;
+    padding: 30px;
+    border: 4px solid #ff2e88;
+    box-shadow: 0 0 20px pink;
+}
+
+.highlight {
+    color: red;
+}
+
+#continueBtn {
+    display: none;
+    margin-top: 20px;
+}
+
+#secretMsg {
+    display: none;
+    margin-top: 20px;
+    font-size: 0.7rem;
+    color: purple;
+}
+</style>
+</head>
+
+<body class="fade-in">
+
+<h1 class="glow">A Letter For You 💖</h1>
+
+<div class="envelope" id="envelope" onclick="openLetter()">
+    <p style="padding-top:80px;">Click To Open 💌</p>
+</div>
+
+<div id="letterContainer">
+    <p id="typeText" class="typewriter"></p>
+
+    <br>
+    <p id="signature"></p>
+
+    <button class="pixel-btn" id="continueBtn" onclick="goToFinale()">
+        Continue 💘
+    </button>
+
+    <p id="secretMsg">💎 Secret: You are my favorite person in every universe.</p>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+const name = localStorage.getItem("valentineName") || "My Love";
+const envelope = document.getElementById("envelope");
+const letterContainer = document.getElementById("letterContainer");
+const typeText = document.getElementById("typeText");
+const signature = document.getElementById("signature");
+const continueBtn = document.getElementById("continueBtn");
+const secretMsg = document.getElementById("secretMsg");
+
+const letterContent =
+`Dear ${name},
+
+From the moment you entered my life,
+everything became brighter.
+
+Your smile is my favorite sight.
+Your laugh is my favorite sound.
+And your presence is my favorite feeling.
+
+You are not just special —
+you are ${name}, and that means everything to me.
+
+Happy Valentine's Week 💖`;
+
+function openLetter() {
+    envelope.style.display = "none";
+    letterContainer.style.display = "block";
+
+    typeWriter(typeText, letterContent, 40);
+
+    setTimeout(() => {
+        signature.innerHTML = "<br><span class='highlight'>With All My Love,</span><br>Yours Forever 💘";
+        continueBtn.style.display = "inline-block";
+    }, 6000);
+}
+
+/* Secret Message */
+letterContainer.addEventListener("dblclick", () => {
+    secretMsg.style.display = "block";
+    confettiBurst();
+});
+
+/* Go to Finale */
+function goToFinale() {
+    window.location.href = "finale.html";
+}
+</script>
+
+</body>
+</html>
